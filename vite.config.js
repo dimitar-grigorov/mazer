@@ -12,6 +12,9 @@ const __dirname = path.dirname(__filename);
 
 const root = resolve(__dirname, 'src')
 
+const isProd = process.env.NODE_ENV === 'production'
+const outDir0 = isProd ? 'dist' : 'prebuild';
+
 const getFiles = () => {
     let files = {}
 
@@ -88,8 +91,10 @@ const copyModules = Object.keys(modulesToCopy).map(moduleName => {
 build({
     configFile: false,
     build: {
+      cssMinify: isProd,
+      minify: isProd ? 'esbuild' : false,
         emptyOutDir: false,
-        outDir: resolve(__dirname, 'dist/assets/compiled/js'),
+        outDir: resolve(__dirname, `${outDir0}/assets/compiled/js`),
         lib: {
             name: 'app',
             formats: ['umd'],
@@ -114,7 +119,7 @@ export default defineConfig((env) => ({
         viteStaticCopy({
             targets: [
                 { src: normalizePath(resolve(__dirname, './src/assets/static')), dest: 'assets' },
-                { src: normalizePath(resolve(__dirname, './dist/assets/compiled/fonts')), dest: 'assets/compiled/css' },
+                { src: normalizePath(resolve(__dirname, `./${outDir0}/assets/compiled/fonts`)), dest: 'assets/compiled/css' },
                 { src: normalizePath(resolve(__dirname, "./node_modules/bootstrap-icons/bootstrap-icons.svg")), dest: 'assets/static/images' },
                 ...copyModules
             ],
@@ -150,10 +155,12 @@ export default defineConfig((env) => ({
         }
     },
     build: {
+      cssMinify: isProd,
+      minify: isProd ? 'esbuild' : false,
         emptyOutDir: false,
         manifest: true,
         target: "chrome58",
-        outDir: resolve(__dirname, 'dist'),
+        outDir: resolve(__dirname, outDir0),
         rollupOptions: {
             input: files,
             output: {

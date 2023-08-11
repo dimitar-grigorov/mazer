@@ -4,10 +4,12 @@
 
 # ignore code scanning from package-lock
 package-lock.json
+/dist/
+/dist.zip
+/prebuild/
+/prebuild.zip
 
-dist.zip
 .yarn/*
 !.yarn/releases
 !.yarn/plugins
 .pnp.*
-dist/*

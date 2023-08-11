@@ -1,14 +1,16 @@
 {
-  "name": "mazer",
+  "name": "@grigorov/mazer",
   "version": "2.1.0",
   "description": "Free and Open-source Bootstrap 5 Admin Dashboard Template and Landing Page",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && npm run prettify",
+    "prebuild": "cross-env NODE_ENV=development vite build && npm run prettify-prebuild",
+    "build": "cross-env NODE_ENV=production vite build && npm run prettify",
     "watch": "vite build --watch",
     "prod-rtl": "npm run build && rtl",
     "rtl": "rtlcss -d \"dist/assets/css\" -e \".rtl.css\" && find . -type f -name '*.rtl.rtl.css' -delete",
-    "prettify": "prettier --write 'dist/*.html'",
+    "prettify-prebuild": "prettier --write \"prebuild/*.html\"",
+    "prettify": "prettier --write \"dist/*.html\"",
     "zip": "bestzip template.zip dist/*",
     "preview": "vite preview"
   },
@@ -29,6 +31,10 @@
   "sponsor": {
     "url": "https://github.com/sponsors/zuramai"
   },
+  "files": [
+    "prebuild/**/*",
+    "dist/**/*"
+  ],
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "^32.0.0",
     "@fontsource/nunito": "^4.5.11",
@@ -73,6 +79,7 @@
     "bestzip": "^2.2.1",
     "browser-sync": "^2.27.11",
     "browser-sync-webpack-plugin": "^2.3.0",
+    "cross-env": "^7.0.3",
     "postcss": "^8.4.20",
     "prettier": "^2.8.1",
     "release-it": "^15.5.1",
