@@ -1,6 +1,6 @@
 {
-  "name": "@grigorov/mazer",
-  "version": "2.1.0",
+  "name": "@grigorov-it/mazer",
+  "version": "2.2.0",
   "description": "Free and Open-source Bootstrap 5 Admin Dashboard Template and Landing Page",
   "scripts": {
     "dev": "vite",
@@ -33,7 +33,8 @@
   },
   "files": [
     "prebuild/**/*",
-    "dist/**/*"
+    "dist/**/*",
+    "!dist/*.html"
   ],
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "^32.0.0",
@@ -105,5 +106,14 @@
         "dist.zip"
       ]
     }
-  }
+  },
+  "main": "vite.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dimitar-grigorov/mazer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dimitar-grigorov/mazer/issues"
+  },
+  "homepage": "https://github.com/dimitar-grigorov/mazer#readme"
 }
